@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.CruisePresetMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.CruisePreset">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cruise_preset_id" jdbcType="INTEGER" property="cruisePresetId" />
+    <result column="preset_device_id" jdbcType="INTEGER" property="presetDeviceId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cruise_path_id" jdbcType="INTEGER" property="cruisePathId" />
+    <result column="cruise_speed" jdbcType="SMALLINT" property="cruiseSpeed" />
+    <result column="cruise_time" jdbcType="SMALLINT" property="cruiseTime" />
+  </resultMap>
+
+  <update id="updateBatch" parameterType="java.util.List">
+    update cruise_preset
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    DELETE  FROM cruise_preset  WHERE cruise_preset_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="findByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select  * from cruise_preset where cruise_preset_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+</mapper>

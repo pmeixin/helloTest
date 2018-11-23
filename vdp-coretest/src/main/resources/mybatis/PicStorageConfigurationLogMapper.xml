@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.PicStorageConfigurationLogMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.PicStorageConfigurationLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="data_type" jdbcType="INTEGER" property="dataType" />
+    <result column="storage_ip" jdbcType="VARCHAR" property="storageIp" />
+    <result column="storage_port" jdbcType="INTEGER" property="storagePort" />
+    <result column="capacity" jdbcType="INTEGER" property="capacity" />
+    <result column="strategy" jdbcType="INTEGER" property="strategy" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="storage_path" jdbcType="VARCHAR" property="storagePath" />
+  </resultMap>
+</mapper>

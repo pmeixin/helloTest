@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.VideoLabelMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.VideoLabel">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="label_id" jdbcType="BIGINT" property="labelId" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="create_user_code" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
+    <result column="update_user_code" jdbcType="VARCHAR" property="updateUserCode" />
+  </resultMap>
+
+  <select id="queryList" resultMap="BaseResultMap" >
+    select * from video_label t where
+    t.id = '${id}'
+    <if test="dateStr != null and dateStr != ''">
+      and to_char(t.start_time, 'yyyy-MM-dd') = '${dateStr}'
+    </if>
+
+  </select>
+
+  <select id="validRepeat" resultMap="BaseResultMap" >
+    select * from video_label vl where
+    vl.id = '${id}'
+    and vl.type = ${type}
+    and to_char(vl.start_time,'yyyy-MM-dd HH24:MI:SS.MS') = '${startTime}'
+    <if test="type == 2">
+      or to_char(vl.end_time,'yyyy-MM-dd HH24:MI:SS.MS') = '${endTime}'
+    </if>
+
+  </select>
+</mapper>

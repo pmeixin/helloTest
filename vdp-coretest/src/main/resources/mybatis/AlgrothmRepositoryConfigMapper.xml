@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.AlgrothmRepositoryConfigMapper">
+    <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.AlgorithmRepositoryConfig">
+
+        <id column="vdp_id" jdbcType="VARCHAR" property="vdpId" />
+        <result column="algorithm_id" jdbcType="VARCHAR" property="algorithmId" />
+    </resultMap>
+
+    <!--<insert id="insert">-->
+        <!--INSERT into algorithm_repository_config VALUES ( #{vdpId},#{algorithmId} );-->
+    <!--</insert>-->
+
+    <!--<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+        <!--SELECT vdp_id,algorithm_id-->
+        <!--FROM algorithm_repository_config-->
+        <!--WHERE vdp_id = #{vdpId}-->
+  <!--</select>-->
+
+    <!--<update id="updateByPrimaryKey">-->
+        <!--update algorithm_repository_config-->
+            <!--set algorithm_id = #{algorithmId}-->
+            <!--where vdp_id = #{vdpId}-->
+    <!--</update>-->
+</mapper>

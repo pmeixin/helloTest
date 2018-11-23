@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.DataRetentionPeriodMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.DataRetentionPeriod">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="SMALLINT" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="vehicle" jdbcType="INTEGER" property="vehicle" />
+    <result column="face_snap" jdbcType="INTEGER" property="faceSnap" />
+    <result column="person" jdbcType="INTEGER" property="person" />
+    <result column="vehicle_notification" jdbcType="INTEGER" property="vehicleNotification" />
+    <result column="face_notification" jdbcType="INTEGER" property="faceNotification" />
+  </resultMap>
+
+  <update id="updateByType" parameterType="com.unisinsight.vdp.core.model.DataRetentionPeriod">
+    update data_retention_period set
+      vehicle = #{vehicle},
+      face_snap = #{faceSnap},
+      person = #{person},
+      vehicle_notification = #{vehicleNotification},
+      face_notification = #{faceNotification}
+    where  type = #{type}
+  </update>
+
+  <select id="getPeriodByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from data_retention_period where type = #{type}
+  </select>
+
+  <delete id="deleteByType" parameterType="java.lang.Integer">
+    delete from data_retention_period where type = #{type}
+  </delete>
+
+  <delete id="deleteAll" >
+    delete from data_retention_period
+  </delete>
+</mapper>

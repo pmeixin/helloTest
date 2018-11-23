@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.CollectionGroupMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.CollectionGroup">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_code" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_code" jdbcType="VARCHAR" property="updateUserCode" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
+  </resultMap>
+  <select id="searchKey" resultMap="BaseResultMap">
+    SELECT * FROM collection_group
+    <where>
+      <if test="name != null and name != ''">
+        name LIKE CONCAT('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap">
+    select * from collection_group
+    where name = #{name}
+  </select>
+</mapper>

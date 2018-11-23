@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.CollectionDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.CollectionDevice">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="collection_device_id" jdbcType="BIGINT" property="collectionDeviceId" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="unit_type" jdbcType="VARCHAR" property="unitType" />
+    <result column="device_code" jdbcType="VARCHAR" property="deviceCode" />
+    <result column="online_status" jdbcType="INTEGER" property="onlineStatus" />
+    <result column="is_start" jdbcType="VARCHAR" property="isStart" />
+    <result column="camera_type" jdbcType="VARCHAR" property="cameraType" />
+    <result column="node_type" jdbcType="VARCHAR" property="nodeType" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_user_code" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="update_user_code" jdbcType="VARCHAR" property="updateUserCode" />
+    <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="install_addr" jdbcType="VARCHAR" property="installAddr" />
+    <result column="place_code" jdbcType="VARCHAR" property="placeCode" />
+    <result column="u_id" jdbcType="VARCHAR" property="uId" />
+  </resultMap>
+
+  <select id="searchKey" resultMap="BaseResultMap">
+    SELECT * FROM collection_device
+    <where>
+      <if test="name != null and name != ''">
+         name LIKE CONCAT('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+
+  <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="collectionDeviceId">
+    insert into collection_device
+    (id,org_code,name,unit_type,device_code,online_status,is_start,camera_type,node_type,category,device_type,longitude,latitude,group_id,ip,place_code,install_addr,u_id)
+    values
+    <foreach collection="list" item="collection_device" separator=",">
+      ( #{collection_device.id},#{collection_device.orgCode},#{collection_device.name},
+      #{collection_device.unitType},#{collection_device.deviceCode},#{collection_device.onlineStatus}
+      ,#{collection_device.isStart},#{collection_device.cameraType},#{collection_device.nodeType},
+      #{collection_device.category},#{collection_device.deviceType},#{collection_device.longitude},
+      #{collection_device.latitude},#{collection_device.groupId},#{collection_device.ip},
+      #{collection_device.placeCode},#{collection_device.installAddr},#{collection_device.uId})
+    </foreach>
+  </insert>
+
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    DELETE FROM collection_device WHERE collection_device_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+</mapper>

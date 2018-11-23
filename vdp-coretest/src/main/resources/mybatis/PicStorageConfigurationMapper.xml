@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unisinsight.vdp.core.mapper.PicStorageConfigurationMapper">
+  <resultMap id="BaseResultMap" type="com.unisinsight.vdp.core.model.PicStorageConfiguration">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="id" jdbcType="SMALLINT" property="id" />
+    <result column="data_type" jdbcType="INTEGER" property="dataType" />
+    <result column="storage_ip" jdbcType="VARCHAR" property="storageIp" />
+    <result column="storage_port" jdbcType="INTEGER" property="storagePort" />
+    <result column="capacity" jdbcType="INTEGER" property="capacity" />
+    <result column="strategy" jdbcType="INTEGER" property="strategy" />
+    <result column="storage_path" jdbcType="VARCHAR" property="storagePath" />
+    <result column="remain_capacity" jdbcType="INTEGER" property="remainCapacity" />
+  </resultMap>
+
+
+  <update id="updateByType" parameterType="com.unisinsight.vdp.core.model.PicStorageConfiguration">
+      update pic_storage_configuration set
+        storage_ip = #{storageIp},
+        storage_port = #{storagePort},
+        capacity = #{capacity},
+        strategy = #{strategy},
+        storage_path = #{storagePath},
+        remain_capacity = #{remainCapacity}
+      where data_type = #{dataType}
+  </update>
+
+  <select id="getInfoByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from pic_storage_configuration where data_type = #{type}
+  </select>
+
+  <delete id="deleteByType" parameterType="java.lang.Integer">
+      delete from pic_storage_configuration where data_type = #{type}
+  </delete>
+
+  <update id="updateAllRemainCapacity" parameterType="java.lang.Integer">
+      update pic_storage_configuration set remain_capacity = #{remainCapacity}
+  </update>
+
+  <delete id="deleteAll" >
+      delete from pic_storage_configuration
+  </delete>
+
+  <select id="getConfigsByTypes" parameterType="java.util.List" resultMap="BaseResultMap">
+      select * from pic_storage_configuration where data_type in
+      <foreach collection="types" open="("   close=")"  separator="," item="type">
+          #{type}
+      </foreach>
+  </select>
+
+</mapper>
